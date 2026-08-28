@@ -5,10 +5,60 @@
 html {
   scroll-behavior: smooth;
 }
+
+:root {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 body {
   background: #fafaf7;
   color: #101828;
   font-size: 1.0625rem;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+html[data-theme='dark'] body {
+  background: #101820;
+  color: #e6f0ed;
+}
+
+html[data-theme='dark'] .bg-white,
+html[data-theme='dark'] .bg-white\/70 {
+  background-color: #17252b;
+}
+
+html[data-theme='dark'] .bg-paper\/85 {
+  background-color: rgb(16 24 32 / 85%);
+}
+
+html[data-theme='dark'] .text-navy {
+  color: #e6f0ed;
+}
+
+html[data-theme='dark'] .text-slate-600,
+html[data-theme='dark'] .text-slate-700 {
+  color: #aebfbb;
+}
+
+html[data-theme='dark'] .text-slate-400,
+html[data-theme='dark'] .text-slate-500 {
+  color: #81948f;
+}
+
+html[data-theme='dark'] .border-slate-300 {
+  border-color: #40534f;
+}
+
+html[data-theme='dark'] .bg-\[\#eff8f7\] {
+  background-color: #193d3a;
+}
+
+html[data-theme='dark'] .bg-\[\#dff4f0\] {
+  background-color: #173b38;
 }
 .display {
   font-family: 'Iowan Old Style', Baskerville, Georgia, serif;

@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from './theme-provider';
 
 const navLinks = [
   { href: '/about', label: 'About' },
@@ -14,6 +16,7 @@ export function Navigation() {
   const [open, setOpen] = useState(false);
   const [howItWorksInView, setHowItWorksInView] = useState(false);
   const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -31,6 +34,8 @@ export function Navigation() {
   }, [pathname]);
 
   const isActive = (href: string) => (href.startsWith('/#') ? howItWorksInView : pathname === href);
+  const nextTheme = theme === 'light' ? 'dark' : 'light';
+  const ThemeIcon = theme === 'dark' ? Sun : Moon;
 
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-paper/85 px-5 backdrop-blur md:px-10">
@@ -69,6 +74,15 @@ export function Navigation() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setTheme(nextTheme)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-slate-300 text-navy transition-colors hover:border-teal hover:text-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/50"
+            aria-label={`Switch to ${nextTheme} theme`}
+            title={`Switch to ${nextTheme} theme`}
+          >
+            <ThemeIcon size={17} strokeWidth={2} aria-hidden="true" />
+          </button>
           <Link
             href="/contact"
             className="rounded-full bg-navy px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal hover:shadow-lg hover:shadow-teal/25 active:translate-y-0 active:shadow-sm"
