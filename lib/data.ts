@@ -1,4 +1,4 @@
-export const config = { whatsapp: '60123456789', email: 'hello@sortedbydz.com', area: 'Malaysia' };
+export const config = { whatsapp: '60149589631', email: 'arwinmxdz@gmail.com', area: 'Malaysia' };
 
 const services = (items: string[]) =>
   items.map((name) => ({

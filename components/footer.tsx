@@ -9,7 +9,7 @@ const legalLinks = [
 ] as const;
 
 const contactItems = [
-  { icon: Phone, label: '+60 12-345 6789', href: 'tel:+60123456789' },
+  { icon: Phone, label: '014-958 9631', href: 'tel:+60149589631' },
   { icon: Mail, label: config.email, href: `mailto:${config.email}` },
   //{ icon: Instagram, label: '@sortedbydz', href: 'https://instagram.com/sortedbydz' },
 ];

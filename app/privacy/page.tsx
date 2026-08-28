@@ -31,7 +31,7 @@ export default function Privacy() {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-navy">Contact</h2>
-                <p className="mt-3">Questions about privacy can be sent to hello@sortedbydz.com.</p>
+                <p className="mt-3">Questions about privacy can be sent to arwinmxdz@gmail.com.</p>
               </div>
             </article>
           </Reveal>
