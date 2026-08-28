@@ -2,6 +2,27 @@ import Link from 'next/link';
 import { Phone, Mail } from 'lucide-react';
 import { config } from '@/lib/data';
 
+function Instagram({ size = 24, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 const legalLinks = [
   ['/contact', 'Contact'],
   ['/privacy', 'Privacy'],
@@ -11,7 +32,7 @@ const legalLinks = [
 const contactItems = [
   { icon: Phone, label: '014-958 9631', href: 'tel:+60149589631' },
   { icon: Mail, label: config.email, href: `mailto:${config.email}` },
-  //{ icon: Instagram, label: '@sortedbydz', href: 'https://instagram.com/sortedbydz' },
+  { icon: Instagram, label: '@arwinm10', href: 'https://www.instagram.com/arwinm10/' },
 ];
 
 export function Footer() {
