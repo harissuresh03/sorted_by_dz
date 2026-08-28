@@ -33,7 +33,7 @@ These are the public business contact details used by the website:
 - **Instagram:** https://www.instagram.com/arwinm10/
 - **Service area:** Malaysia
 
-Do not add Gmail passwords, app passwords, or other private secrets to this README or commit them to Git.
+
 
 ## Getting Started
 
