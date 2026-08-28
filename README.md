@@ -51,25 +51,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in a browser.
 
-## Email Configuration
-
-Copy `.env.local.example` to `.env.local` and add the Gmail app password locally:
-
-```bash
-cp .env.local.example .env.local
-```
-
-Then set `SMTP_PASS` in `.env.local`. The example configuration uses Gmail SMTP and sends website enquiries to `arwinmxdz@gmail.com`:
-
-```env
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=465
-SMTP_USER=arwinmxdz@gmail.com
-SMTP_PASS=your_gmail_app_password
-OWNER_EMAIL=arwinmxdz@gmail.com
-```
-
-Use a Gmail App Password rather than the normal Gmail account password. Restart the development server after changing environment variables.
 
 ## Useful Commands
 
