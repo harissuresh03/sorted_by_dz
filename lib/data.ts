@@ -12,24 +12,6 @@ const services = (items: string[]) =>
 
 export const categories = [
   {
-    slug: 'events-and-weddings',
-    name: 'Events and Weddings',
-    desc: 'The people and details behind a good gathering, from the first vendor to the final dance.',
-    items: services([
-      'Photography',
-      'Videography',
-      '360° Camera Booth',
-      'Event and wedding decoration',
-      'DJs and entertainers',
-      'Live bands and singers',
-      'Catering',
-      'Cakes and desserts',
-      'Licensed beverage supply',
-      'Tables, chairs and canopy rental',
-      'Bridal makeup and hairstyling',
-    ]),
-  },
-  {
     slug: 'nightlife',
     name: 'Nightlife',
     desc: 'A smoother night out, with the table, guest list, and entertainment already sorted.',
@@ -53,11 +35,22 @@ export const categories = [
       'Video editing',
       'Influencer marketing',
       'Website development',
+      'Photography',
+      'Videography',
+      '360° Camera Booth',
+      'Event and wedding decoration',
+      'DJs and entertainers',
+      'Live bands and singers',
+      'Catering',
+      'Cakes and desserts',
+      'Licensed beverage supply',
+      'Tables, chairs and canopy rental',
+      'Bridal makeup and hairstyling',
     ]),
   },
   {
     slug: 'home-and-moving',
-    name: 'Home and Moving',
+    name: 'Household & Living Needs',
     desc: 'A more comfortable, better-kept space, and reliable hands when it is time to move.',
     items: services([
       'Movers and lorry rental',
@@ -66,30 +59,7 @@ export const categories = [
       'Electrical work',
       'Painting',
       'Interior design',
-    ]),
-  },
-  {
-    slug: 'automotive',
-    name: 'Automotive',
-    desc: 'Keeping your car running well and looking its best, without the runaround.',
-    items: services(['Car servicing', 'Car detailing', 'Car painting and body repair']),
-  },
-  {
-    slug: 'personal-and-learning',
-    name: 'Personal and Learning',
-    desc: 'Time and attention matched to what you or your family are working on.',
-    items: services(['Personal trainers', 'Tailoring and clothing alterations', 'Private tuition']),
-  },
-  {
-    slug: 'travel',
-    name: 'Travel',
-    desc: 'A trip that is planned well before it begins, from flights to the last day.',
-    items: services([
-      'Flights and accommodation assistance',
-      'Airport transportation',
-      'Tour guides',
-      'Itinerary planning',
-      'Group tours',
+      'Vegetables supply',
     ]),
   },
 ];
@@ -97,12 +67,12 @@ export const categories = [
 // Manually curated for the homepage "Featured services" section.
 // Reorder or swap these freely — each just references a category + service slug above.
 const featuredServiceRefs: { categorySlug: string; serviceSlug: string }[] = [
-  { categorySlug: 'events-and-weddings', serviceSlug: 'photography' },
-  { categorySlug: 'events-and-weddings', serviceSlug: 'event-and-wedding-decoration' },
+  { categorySlug: 'marketing-and-digital', serviceSlug: 'photography' },
+  { categorySlug: 'marketing-and-digital', serviceSlug: 'event-and-wedding-decoration' },
   { categorySlug: 'marketing-and-digital', serviceSlug: 'website-development' },
   { categorySlug: 'home-and-moving', serviceSlug: 'movers-and-lorry-rental' },
-  { categorySlug: 'automotive', serviceSlug: 'car-detailing' },
-  { categorySlug: 'personal-and-learning', serviceSlug: 'private-tuition' },
+  { categorySlug: 'home-and-moving', serviceSlug: 'vegetables-supply' },
+  { categorySlug: 'nightlife', serviceSlug: 'club-table-reservations' },
 ];
 
 export function getFeaturedServices() {

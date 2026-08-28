@@ -3,25 +3,17 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
-  PartyPopper,
   Music,
   Megaphone,
   Home,
-  Car,
-  GraduationCap,
-  Plane,
   type LucideIcon,
 } from 'lucide-react';
 import { categories } from '@/lib/data';
 
 const icons: Record<string, LucideIcon> = {
-  'events-and-weddings': PartyPopper,
   nightlife: Music,
   'marketing-and-digital': Megaphone,
   'home-and-moving': Home,
-  automotive: Car,
-  'personal-and-learning': GraduationCap,
-  travel: Plane,
 };
 
 export function ServiceExplorer() {

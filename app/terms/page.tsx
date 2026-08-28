@@ -2,7 +2,7 @@ import { Reveal } from '@/components/reveal';
 
 export default function Terms() {
   return (
-    <main className="grid-bg min-h-[72vh] px-5 py-24 md:px-10">
+    <main className="min-h-[72vh] px-5 py-24 md:px-10">
         <section className="mx-auto max-w-3xl">
           <Reveal>
             <p className="font-mono text-[10px] uppercase tracking-[.2em] text-teal">Legal</p>

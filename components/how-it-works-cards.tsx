@@ -95,7 +95,7 @@ export function HowItWorksCards() {
   }, []);
 
   return (
-    <div id="how-it-works" ref={pinRef} className="grid-bg scroll-mt-24 px-5 py-24 md:px-10">
+    <div id="how-it-works" ref={pinRef} className="scroll-mt-24 px-5 py-24 md:px-10">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <p className="font-mono text-[10px] uppercase tracking-[.2em] text-teal">A quick guide</p>

@@ -8,7 +8,7 @@ export default function Home() {
   const featured = getFeaturedServices();
 
   return (
-    <main className="grid-bg">
+    <main>
       {/* Hero */}
       <section className="relative overflow-hidden px-5 py-24 md:px-10 md:py-36">
         <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-2 md:items-center">
@@ -64,11 +64,11 @@ export default function Home() {
                   A place to start
                 </p>
                 <h2 className="display mt-4 max-w-2xl text-5xl font-bold leading-tight text-navy">
-                  Featured services
+                  Services
                 </h2>
               </div>
               <Button href="/services" variant="secondary">
-                Explore services →
+                View more details →
               </Button>
             </div>
           </Reveal>

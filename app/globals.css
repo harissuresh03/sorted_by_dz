@@ -8,11 +8,7 @@ html {
 body {
   background: #fafaf7;
   color: #101828;
-}
-.grid-bg {
-  background-image: linear-gradient(#0f766e0b 1px, transparent 1px),
-    linear-gradient(90deg, #0f766e0b 1px, transparent 1px);
-  background-size: 42px 42px;
+  font-size: 1.0625rem;
 }
 .display {
   font-family: 'Iowan Old Style', Baskerville, Georgia, serif;

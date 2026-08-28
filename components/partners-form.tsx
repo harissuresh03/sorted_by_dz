@@ -9,12 +9,11 @@ export function PartnersForm() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus('sending');
-    const data = Object.fromEntries(new FormData(event.currentTarget));
+    const formData = new FormData(event.currentTarget);
     try {
       const response = await fetch('/api/partners', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: formData,
       });
       if (!response.ok) throw new Error();
       setStatus('sent');
@@ -46,6 +45,15 @@ export function PartnersForm() {
             required
             name="business"
             className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
+          />
+        </label>
+        <label className="text-sm font-bold text-slate-700 md:col-span-2">
+          Supporting file (optional)
+          <input
+            name="attachment"
+            type="file"
+            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+            className="mt-2 block w-full rounded border border-slate-300 bg-white px-3 py-3 font-normal text-slate-600 outline-none file:mr-4 file:rounded file:border-0 file:bg-teal file:px-3 file:py-2 file:font-bold file:text-white focus:border-teal focus:ring-2 focus:ring-mint/40"
           />
         </label>
         <label className="text-sm font-bold text-slate-700">

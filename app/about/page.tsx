@@ -19,7 +19,7 @@ const values = [
 
 export default function About() {
   return (
-    <main className="grid-bg">
+    <main>
       {/* Intro */}
       <section className="px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-2 md:items-center">

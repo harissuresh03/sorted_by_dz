@@ -5,12 +5,13 @@ const safe = (value: unknown) => (typeof value === 'string' ? value.trim().slice
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const business = safe(body.business);
-    const contact = safe(body.contact);
-    const phone = safe(body.phone);
-    const area = safe(body.area);
-    const offer = safe(body.offer);
+    const formData = await request.formData();
+    const business = safe(formData.get('business'));
+    const contact = safe(formData.get('contact'));
+    const phone = safe(formData.get('phone'));
+    const area = safe(formData.get('area'));
+    const offer = safe(formData.get('offer'));
+    const attachment = formData.get('attachment');
 
     if (!business || !contact || !phone || !area || !offer) {
       return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
@@ -28,13 +29,27 @@ export async function POST(request: Request) {
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
 
-    await transporter.sendMail({
+    const mail = {
       from: `Sorted by DZ <${SMTP_USER}>`,
       to: OWNER_EMAIL,
       replyTo: contact.includes('@') ? contact : undefined,
       subject: `New partner introduction — ${business}`,
       text: `Business: ${business}\nContact: ${contact}\nPhone: ${phone}\nService area: ${area}\n\nServices offered:\n${offer}`,
-    });
+      attachments: [] as { filename: string; content: Buffer; contentType?: string }[],
+    };
+
+    if (attachment instanceof File && attachment.size > 0) {
+      if (attachment.size > 10 * 1024 * 1024) {
+        return NextResponse.json({ error: 'File must be 10 MB or smaller.' }, { status: 400 });
+      }
+      mail.attachments.push({
+        filename: attachment.name,
+        content: Buffer.from(await attachment.arrayBuffer()),
+        contentType: attachment.type || undefined,
+      });
+    }
+
+    await transporter.sendMail(mail);
 
     return NextResponse.json({ ok: true });
   } catch {
