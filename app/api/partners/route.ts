@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const phone = safe(formData.get('phone'));
     const area = safe(formData.get('area'));
     const offer = safe(formData.get('offer'));
-    const attachment = formData.get('attachment');
+    const attachments = formData.getAll('attachment');
 
     if (!business || !contact || !phone || !area || !offer) {
       return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
@@ -38,15 +38,17 @@ export async function POST(request: Request) {
       attachments: [] as { filename: string; content: Buffer; contentType?: string }[],
     };
 
-    if (attachment instanceof File && attachment.size > 0) {
-      if (attachment.size > 10 * 1024 * 1024) {
+    for (const attachment of attachments) {
+      if (attachment instanceof File && attachment.size > 0) {
+        if (attachment.size > 10 * 1024 * 1024) {
         return NextResponse.json({ error: 'File must be 10 MB or smaller.' }, { status: 400 });
+        }
+        mail.attachments.push({
+          filename: attachment.name,
+          content: Buffer.from(await attachment.arrayBuffer()),
+          contentType: attachment.type || undefined,
+        });
       }
-      mail.attachments.push({
-        filename: attachment.name,
-        content: Buffer.from(await attachment.arrayBuffer()),
-        contentType: attachment.type || undefined,
-      });
     }
 
     await transporter.sendMail(mail);

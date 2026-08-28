@@ -1,13 +1,31 @@
 'use client';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { config } from '@/lib/data';
 import { Button } from '@/components/button';
 
 export function PartnersForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [files, setFiles] = useState<File[]>([]);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const oversizedFiles = files.filter((file) => file.size > 10 * 1024 * 1024);
+
+  function selectFiles(event: React.ChangeEvent<HTMLInputElement>) {
+    setFiles(Array.from(event.target.files || []));
+  }
+
+  function removeFile(fileToRemove: File) {
+    const remainingFiles = files.filter((file) => file !== fileToRemove);
+    setFiles(remainingFiles);
+    if (fileInput.current) {
+      const transfer = new DataTransfer();
+      remainingFiles.forEach((file) => transfer.items.add(file));
+      fileInput.current.files = transfer.files;
+    }
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (oversizedFiles.length > 0) return;
     setStatus('sending');
     const formData = new FormData(event.currentTarget);
     try {
@@ -18,6 +36,7 @@ export function PartnersForm() {
       if (!response.ok) throw new Error();
       setStatus('sent');
       event.currentTarget.reset();
+      setFiles([]);
     } catch {
       setStatus('error');
     }
@@ -47,15 +66,6 @@ export function PartnersForm() {
             className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
           />
         </label>
-        <label className="text-sm font-bold text-slate-700 md:col-span-2">
-          Supporting file (optional)
-          <input
-            name="attachment"
-            type="file"
-            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-            className="mt-2 block w-full rounded border border-slate-300 bg-white px-3 py-3 font-normal text-slate-600 outline-none file:mr-4 file:rounded file:border-0 file:bg-teal file:px-3 file:py-2 file:font-bold file:text-white focus:border-teal focus:ring-2 focus:ring-mint/40"
-          />
-        </label>
         <label className="text-sm font-bold text-slate-700">
           Contact name
           <input
@@ -80,6 +90,39 @@ export function PartnersForm() {
             placeholder="Town, state, or region"
             className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
           />
+        </label>
+        <label className="text-sm font-bold text-slate-700 md:col-span-2">
+          Supporting files (optional)
+          <input
+            ref={fileInput}
+            name="attachment"
+            type="file"
+            multiple
+            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+            onChange={selectFiles}
+            className="mt-2 block w-full rounded border border-slate-300 bg-white px-3 py-3 font-normal text-slate-600 outline-none file:mr-4 file:rounded file:border-0 file:bg-teal file:px-3 file:py-2 file:font-bold file:text-white focus:border-teal focus:ring-2 focus:ring-mint/40"
+          />
+          {files.length > 0 && (
+            <ul className="mt-3 space-y-2 text-sm font-normal text-slate-600">
+              {files.map((file) => (
+                <li key={`${file.name}-${file.lastModified}`} className="flex items-center justify-between gap-3">
+                  <span className="truncate">{file.name}</span>
+                  <button
+                    type="button"
+                    onClick={() => removeFile(file)}
+                    className="shrink-0 font-bold text-red-700 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          {oversizedFiles.length > 0 && (
+            <p className="mt-3 text-sm font-bold text-red-700">
+              {oversizedFiles.map((file) => file.name).join(', ')} must be 10 MB or smaller.
+            </p>
+          )}
         </label>
         <label className="text-sm font-bold text-slate-700 md:col-span-2">
           What services do you offer?
