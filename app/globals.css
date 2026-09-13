@@ -15,51 +15,85 @@ html[data-theme='dark'] {
 }
 
 body {
-  background: #fafaf7;
-  color: #101828;
+  background-color: #faf9f6;
+  background-image:
+    radial-gradient(at 15% 12%, rgba(45, 212, 191, 0.12) 0px, transparent 45%),
+    radial-gradient(at 88% 18%, rgba(15, 118, 110, 0.08) 0px, transparent 40%),
+    radial-gradient(at 50% 75%, rgba(45, 212, 191, 0.07) 0px, transparent 50%),
+    radial-gradient(at 90% 88%, rgba(11, 19, 43, 0.04) 0px, transparent 45%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #0b132b;
   font-size: 1.0625rem;
-  transition: background-color 200ms ease, color 200ms ease;
+  transition: background-color 300ms ease, color 300ms ease;
+  min-height: 100vh;
 }
 
 html[data-theme='dark'] body {
-  background: #101820;
-  color: #e6f0ed;
+  background-color: #080d1a;
+  background-image:
+    radial-gradient(at 12% 16%, rgba(15, 118, 110, 0.24) 0px, transparent 45%),
+    radial-gradient(at 88% 14%, rgba(45, 212, 191, 0.15) 0px, transparent 40%),
+    radial-gradient(at 50% 60%, rgba(15, 23, 42, 0.7) 0px, transparent 60%),
+    radial-gradient(at 82% 85%, rgba(15, 118, 110, 0.18) 0px, transparent 50%),
+    radial-gradient(at 18% 85%, rgba(45, 212, 191, 0.09) 0px, transparent 45%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #ffffff;
 }
 
+/* Eliminate grey colors site-wide */
+.text-slate-400,
+.text-slate-500,
+.text-slate-600,
+.text-slate-700 {
+  color: #0b132b;
+  opacity: 0.85;
+}
+
+.border-slate-200,
+.border-slate-300 {
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+/* Dark mode overrides (solid colors, zero greys) */
 html[data-theme='dark'] .bg-white,
 html[data-theme='dark'] .bg-white\/70 {
-  background-color: #17252b;
+  background-color: #121c33;
 }
 
+html[data-theme='dark'] .bg-paper,
 html[data-theme='dark'] .bg-paper\/85 {
-  background-color: rgb(16 24 32 / 85%);
+  background-color: #0b132b;
 }
 
 html[data-theme='dark'] .text-navy {
-  color: #e6f0ed;
+  color: #ffffff;
 }
 
 html[data-theme='dark'] .text-slate-600,
-html[data-theme='dark'] .text-slate-700 {
-  color: #aebfbb;
-}
-
+html[data-theme='dark'] .text-slate-700,
 html[data-theme='dark'] .text-slate-400,
 html[data-theme='dark'] .text-slate-500 {
-  color: #81948f;
+  color: #e6f7f5;
+  opacity: 0.95;
 }
 
-html[data-theme='dark'] .border-slate-300 {
-  border-color: #40534f;
+html[data-theme='dark'] .border-slate-300,
+html[data-theme='dark'] .border-slate-200 {
+  border-color: rgba(45, 212, 191, 0.3);
 }
 
 html[data-theme='dark'] .bg-\[\#eff8f7\] {
-  background-color: #193d3a;
+  background-color: rgba(15, 118, 110, 0.3);
 }
 
 html[data-theme='dark'] .bg-\[\#dff4f0\] {
-  background-color: #173b38;
+  background-color: #102538;
 }
+
 .display {
   font-family: 'Iowan Old Style', Baskerville, Georgia, serif;
 }

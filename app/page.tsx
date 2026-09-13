@@ -1,12 +1,8 @@
-import Link from 'next/link';
-import { Reveal } from '@/components/reveal';
-import { Button } from '@/components/button';
+import Button from '@/components/button';
 import { HowItWorksCards } from '@/components/how-it-works-cards';
-import { getFeaturedServices } from '@/lib/data';
+import ServicesSection from '@/components/ServicesSection';
 
 export default function Home() {
-  const featured = getFeaturedServices();
-
   return (
     <main>
       {/* Hero */}
@@ -23,7 +19,7 @@ export default function Home() {
               <br />
               sorted.
             </h1>
-            <p className="mt-7 max-w-md text-lg leading-8 text-slate-600">
+            <p className="mt-7 max-w-md text-lg leading-8 text-navy/85 dark:text-white/90">
               Tell DZ what you need. We help connect you with suitable service providers, without the
               endless searching.
             </p>
@@ -34,19 +30,13 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="relative aspect-square max-h-[490px]">
-            <div className="absolute inset-[12%] rounded-full border border-teal/30 shadow-[0_0_0_55px_rgba(45,212,191,.06),0_0_0_110px_rgba(45,212,191,.04)]" />
-            <div className="absolute left-[42%] top-[43%] h-8 w-8 rounded-full bg-mint shadow-[0_0_35px_10px_rgba(45,212,191,.5)]" />
-            {Array.from({ length: 13 }, (_, i) => (
-              <span
-                key={i}
-                className="absolute h-3 w-3 rounded-full border border-teal bg-white"
-                style={{ left: `${10 + (i * 31) % 82}%`, top: `${12 + (i * 47) % 76}%` }}
-              />
-            ))}
-            <svg className="absolute inset-0 h-full w-full opacity-40" viewBox="0 0 500 500">
-              <path d="M70 90 255 220 400 95 415 365 135 390 255 220" fill="none" stroke="#0f766e" />
-            </svg>
+          <div
+            aria-label="Hero image placeholder"
+            className="flex aspect-square max-h-[490px] items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-teal/30 bg-teal/5 dark:border-mint/35 dark:bg-teal/10"
+          >
+            <span className="font-mono text-xs font-bold uppercase tracking-[.2em] text-teal/70 dark:text-mint/70">
+              Add image here
+            </span>
           </div>
         </div>
       </section>
@@ -54,51 +44,7 @@ export default function Home() {
       {/* How it works — guide (header + horizontal card scroll, self-contained) */}
       <HowItWorksCards />
 
-      {/* Featured services */}
-      <section className="px-5 py-24 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[.2em] text-teal">
-                  A place to start
-                </p>
-                <h2 className="display mt-4 max-w-2xl text-5xl font-bold leading-tight text-navy">
-                  Services
-                </h2>
-              </div>
-              <Button href="/services" variant="secondary">
-                View more details →
-              </Button>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((service, i) => (
-              <Reveal key={service.slug} delay={i * 60}>
-                <Link
-                  href={`/contact?category=${service.categorySlug}&service=${service.slug}`}
-                  className="group flex h-full flex-col justify-between rounded-lg border border-teal/15 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-teal/40 hover:shadow-xl"
-                >
-                  <div>
-                    <p className="font-mono text-xs text-teal">0{i + 1}</p>
-                    <p className="mt-6 text-[11px] font-bold uppercase tracking-wide text-slate-400">
-                      {service.categoryName}
-                    </p>
-                    <p className="mt-2 text-2xl font-bold leading-tight text-navy">{service.name}</p>
-                  </div>
-                  <div className="mt-8 flex items-center gap-2 text-sm font-bold text-teal">
-                    Request this service
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesSection />
     </main>
   );
 }

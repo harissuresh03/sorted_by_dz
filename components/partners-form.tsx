@@ -1,7 +1,7 @@
 'use client';
 import { FormEvent, useRef, useState } from 'react';
 import { config } from '@/lib/data';
-import { Button } from '@/components/button';
+import Button from '@/components/button';   // ✅ correct
 
 export function PartnersForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
@@ -55,43 +55,43 @@ export function PartnersForm() {
     <form
       id="partners-form"
       onSubmit={submit}
-      className="mt-10 max-w-2xl rounded-lg border-t-4 border-teal bg-white p-6 shadow-xl md:p-9"
+      className="relative mt-0 flex h-full w-full max-w-none flex-col overflow-hidden rounded-3xl border-2 border-teal/25 bg-white p-6 shadow-xl before:absolute before:inset-x-0 before:top-0 before:h-2 before:bg-gradient-to-r before:from-teal before:via-mint before:to-teal dark:border-teal/40 dark:bg-[#121c33] md:p-8"
     >
-      <div className="grid gap-5 md:grid-cols-2">
-        <label className="text-sm font-bold text-slate-700">
+      <div className="min-w-0 flex-1 space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
+        <label className="text-sm font-bold text-navy dark:text-white">
           Business / provider name
           <input
             required
             name="business"
-            className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
+            className="mt-2 w-full rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:focus:border-mint"
           />
         </label>
-        <label className="text-sm font-bold text-slate-700">
+        <label className="text-sm font-bold text-navy dark:text-white">
           Contact name
           <input
             required
             name="contact"
-            className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
+            className="mt-2 w-full rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:focus:border-mint"
           />
         </label>
-        <label className="text-sm font-bold text-slate-700">
+        <label className="text-sm font-bold text-navy dark:text-white">
           Phone / WhatsApp
           <input
             required
             name="phone"
-            className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
+            className="mt-2 w-full rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:focus:border-mint"
           />
         </label>
-        <label className="text-sm font-bold text-slate-700">
+        <label className="text-sm font-bold text-navy dark:text-white">
           Service area
           <input
             required
             name="area"
             placeholder="Town, state, or region"
-            className="mt-2 w-full rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
+            className="mt-2 w-full rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors placeholder:text-navy/40 focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:placeholder:text-white/40 dark:focus:border-mint"
           />
         </label>
-        <label className="text-sm font-bold text-slate-700 md:col-span-2">
+        <label className="text-sm font-bold text-navy dark:text-white md:col-span-2">
           Supporting files (optional)
           <input
             ref={fileInput}
@@ -100,17 +100,17 @@ export function PartnersForm() {
             multiple
             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
             onChange={selectFiles}
-            className="mt-2 block w-full rounded border border-slate-300 bg-white px-3 py-3 font-normal text-slate-600 outline-none file:mr-4 file:rounded file:border-0 file:bg-teal file:px-3 file:py-2 file:font-bold file:text-white focus:border-teal focus:ring-2 focus:ring-mint/40"
+            className="mt-2 block w-full rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none file:mr-4 file:rounded-lg file:border-0 file:bg-teal file:px-4 file:py-2 file:font-bold file:text-white hover:file:bg-navy focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:hover:file:bg-mint dark:hover:file:text-navy"
           />
           {files.length > 0 && (
-            <ul className="mt-3 space-y-2 text-sm font-normal text-slate-600">
+            <ul className="mt-3 space-y-2 text-sm font-medium text-navy dark:text-white">
               {files.map((file) => (
                 <li key={`${file.name}-${file.lastModified}`} className="flex items-center justify-between gap-3">
                   <span className="truncate">{file.name}</span>
                   <button
                     type="button"
                     onClick={() => removeFile(file)}
-                    className="shrink-0 font-bold text-red-700 hover:text-red-900"
+                    className="cursor-pointer shrink-0 font-bold text-red-600 hover:text-red-800 dark:text-red-400"
                   >
                     Delete
                   </button>
@@ -119,23 +119,23 @@ export function PartnersForm() {
             </ul>
           )}
           {oversizedFiles.length > 0 && (
-            <p className="mt-3 text-sm font-bold text-red-700">
+            <p className="mt-3 text-sm font-bold text-red-600 dark:text-red-400">
               {oversizedFiles.map((file) => file.name).join(', ')} must be 10 MB or smaller.
             </p>
           )}
         </label>
-        <label className="text-sm font-bold text-slate-700 md:col-span-2">
+        <label className="text-sm font-bold text-navy dark:text-white md:col-span-2">
           What services do you offer?
           <textarea
             required
             name="offer"
             rows={5}
             placeholder="Please include your specialty and anything useful to know."
-            className="mt-2 w-full resize-y rounded border border-slate-300 px-3 py-3 font-normal outline-none focus:border-teal focus:ring-2 focus:ring-mint/40"
+            className="mt-2 w-full resize-y rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors placeholder:text-navy/40 focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:placeholder:text-white/40 dark:focus:border-mint"
           />
         </label>
       </div>
-      <div className="mt-7 flex flex-wrap gap-3">
+      <div className="mt-6 flex flex-wrap gap-3">
         <Button type="submit" disabled={status === 'sending'}>
           {status === 'sending' ? 'Sending…' : 'Introduce your service'}
         </Button>
@@ -144,16 +144,16 @@ export function PartnersForm() {
         </Button>
       </div>
       {status === 'sent' && (
-        <p className="mt-4 text-sm font-bold text-teal">
+        <p className="mt-4 text-sm font-bold text-teal dark:text-mint">
           Thanks — your introduction has been sent. DZ will be in touch.
         </p>
       )}
       {status === 'error' && (
-        <p className="mt-4 text-sm font-bold text-red-700">
+        <p className="mt-4 text-sm font-bold text-red-600 dark:text-red-400">
           Email could not be sent. Please try WhatsApp or contact DZ directly.
         </p>
       )}
-      <small className="mt-4 block text-slate-500">
+      <small className="mt-4 block font-medium text-navy/70 dark:text-white/70">
         Submitting does not guarantee a partnership or recommendation.
       </small>
     </form>

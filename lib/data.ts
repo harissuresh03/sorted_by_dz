@@ -15,6 +15,8 @@ export const categories = [
     slug: 'nightlife',
     name: 'Nightlife',
     desc: 'A smoother night out, with the table, guest list, and entertainment already sorted.',
+    tags: ['Table booking', 'Guest list', 'Entertainment'],
+    imageUrl: 'https://images.unsplash.com/photo-1517623425535-1f0298726205?auto=format&fit=crop&w=800&q=80',
     items: services([
       'Club table reservations',
       'Guest-list arrangements',
@@ -26,6 +28,8 @@ export const categories = [
     slug: 'marketing-and-digital',
     name: 'Marketing and Digital',
     desc: 'Practical creative and digital support for a brand or business that needs to move.',
+    tags: ['Photography', 'Web development', 'Event decoration'],
+    imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80',
     items: services([
       'Logo design',
       'Posters and flyers',
@@ -52,6 +56,8 @@ export const categories = [
     slug: 'home-and-moving',
     name: 'Household & Living Needs',
     desc: 'A more comfortable, better-kept space, and reliable hands when it is time to move.',
+    tags: ['Movers', 'Vegetables supply'],
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
     items: services([
       'Movers and lorry rental',
       'Air-conditioning servicing',
