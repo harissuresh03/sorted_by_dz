@@ -103,7 +103,6 @@ export const translations: Record<Language, Record<string, string>> = {
     'Contact Details': 'Butiran hubungan',
     'Phone number or email': 'Nombor telefon atau e-mel',
     'Selected Service': 'Perkhidmatan dipilih',
-    'Choose a service': 'Pilih perkhidmatan',
     Description: 'Penerangan',
     'Tell DZ what you need, any timing, location, and useful details.': 'Beritahu DZ apa yang anda perlukan, masa, lokasi dan butiran yang berkaitan.',
     'Sending…': 'Sedang dihantar…',
