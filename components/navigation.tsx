@@ -4,11 +4,12 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from './theme-provider';
+import { useLanguage } from './language-provider';
 
 const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/#how-it-works', label: 'How it works' },
-  // { href: '/services', label: 'Services' }, // removed from nav
+  { href: '/services', label: 'Services' },
   { href: '/partners', label: 'Partner with us' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -19,6 +20,7 @@ export function Navigation() {
   const [howItWorksInView, setHowItWorksInView] = useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
 
   const handleHowItWorksClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     setOpen(false);
@@ -90,7 +92,7 @@ export function Navigation() {
                   active ? 'text-teal dark:text-mint' : 'hover:text-teal dark:hover:text-mint'
                 }`}
               >
-                {label}
+                {t(label)}
                 <span
                   className={`absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-teal dark:bg-mint transition-transform duration-300 ${
                     active ? 'scale-x-100' : 'group-hover:scale-x-100'
@@ -102,12 +104,35 @@ export function Navigation() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setLanguage(language === 'en' ? 'bm' : 'en')}
+              className={`relative inline-flex h-10 w-24 items-center justify-between overflow-hidden rounded-full border-2 border-teal px-2.5 text-[10px] font-extrabold text-teal shadow-sm backdrop-blur-xl transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/50 dark:border-mint dark:text-mint ${
+                isScrolled
+                  ? 'bg-white/35 dark:bg-[#0b132b]/35'
+                  : 'bg-white dark:bg-[#121c33]'
+              }`}
+              aria-label={language === 'en' ? 'Switch to Bahasa Melayu' : 'Switch to English'}
+              role="switch"
+              aria-checked={language === 'bm'}
+            >
+              <span className={`relative z-10 w-8 text-center transition-colors duration-200 ${language === 'en' ? 'text-white' : ''}`}>EN</span>
+              <span className={`relative z-10 w-8 text-center transition-colors duration-200 ${language === 'bm' ? 'text-navy' : ''}`}>BM</span>
+              <span
+                className={`absolute left-1 top-1 h-7 w-10 rounded-full bg-teal shadow-sm transition-transform duration-300 ease-out dark:bg-mint ${
+                  language === 'bm' ? 'translate-x-10' : 'translate-x-0'
+                }`}
+                aria-hidden="true"
+              />
+            </button>
+          </div>
           <button
             type="button"
             onClick={() => setTheme(nextTheme)}
             className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border-2 border-teal bg-white text-teal shadow-sm transition-all duration-200 hover:scale-105 hover:bg-teal hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal/50 dark:border-mint dark:bg-[#121c33] dark:text-mint dark:hover:bg-mint dark:hover:text-navy"
-            aria-label={`Switch to ${nextTheme} theme`}
-            title={`Switch to ${nextTheme} theme`}
+            aria-label={t(`Switch to ${nextTheme} theme`)}
+            title={t(`Switch to ${nextTheme} theme`)}
           >
             <ThemeIcon size={17} strokeWidth={2.5} aria-hidden="true" />
           </button>
@@ -115,9 +140,9 @@ export function Navigation() {
             href="/contact"
             className="cursor-pointer rounded-full border-2 border-teal bg-teal px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:border-navy hover:bg-navy active:scale-95 dark:border-teal dark:bg-teal dark:hover:border-mint dark:hover:bg-mint dark:hover:text-navy"
           >
-            Make a request →
+            {t('Make a request →')}
           </Link>
-          <button onClick={() => setOpen(!open)} className="text-xl text-navy dark:text-white md:hidden" aria-label="Toggle menu">
+          <button onClick={() => setOpen(!open)} className="text-xl text-navy dark:text-white md:hidden" aria-label={open ? t('Close menu') : t('Open menu')}>
             ☰
           </button>
         </div>
@@ -139,7 +164,7 @@ export function Navigation() {
                     : 'text-navy hover:bg-teal/10 hover:text-teal dark:text-white dark:hover:bg-mint/10 dark:hover:text-mint'
                 }`}
               >
-                {label}
+                {t(label)}
               </Link>
             );
           })}

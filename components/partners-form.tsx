@@ -2,8 +2,10 @@
 import { FormEvent, useRef, useState } from 'react';
 import { config } from '@/lib/data';
 import Button from '@/components/button';   // ✅ correct
+import { useLanguage } from '@/components/language-provider';
 
 export function PartnersForm() {
+  const { t } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [files, setFiles] = useState<File[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
@@ -45,9 +47,9 @@ export function PartnersForm() {
   function whatsapp() {
     const form = document.getElementById('partners-form') as HTMLFormElement;
     const data = Object.fromEntries(new FormData(form));
-    const message = `Hello DZ, I’d like to introduce my service.\n\nBusiness: ${data.business || ''}\nContact: ${
+    const message = `${t('Hello DZ, I’d like to introduce my service.')}\n\n${t('Business')}: ${data.business || ''}\n${t('Contact')}: ${
       data.contact || ''
-    }\nPhone: ${data.phone || ''}\nService area: ${data.area || ''}\nServices: ${data.offer || ''}`;
+    }\n${t('Phone')}: ${data.phone || ''}\n${t('Service area')}: ${data.area || ''}\n${t('Services')}: ${data.offer || ''}`;
     window.open(`https://wa.me/${config.whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   }
 
@@ -59,7 +61,7 @@ export function PartnersForm() {
     >
       <div className="min-w-0 flex-1 space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
         <label className="text-sm font-bold text-navy dark:text-white">
-          Business / provider name
+          {t('Business / provider name')}
           <input
             required
             name="business"
@@ -67,7 +69,7 @@ export function PartnersForm() {
           />
         </label>
         <label className="text-sm font-bold text-navy dark:text-white">
-          Contact name
+          {t('Contact name')}
           <input
             required
             name="contact"
@@ -75,7 +77,7 @@ export function PartnersForm() {
           />
         </label>
         <label className="text-sm font-bold text-navy dark:text-white">
-          Phone / WhatsApp
+          {t('Phone / WhatsApp')}
           <input
             required
             name="phone"
@@ -83,16 +85,16 @@ export function PartnersForm() {
           />
         </label>
         <label className="text-sm font-bold text-navy dark:text-white">
-          Service area
+          {t('Service area')}
           <input
             required
             name="area"
-            placeholder="Town, state, or region"
+            placeholder={t('Town, state, or region')}
             className="mt-2 w-full rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors placeholder:text-navy/40 focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:placeholder:text-white/40 dark:focus:border-mint"
           />
         </label>
         <label className="text-sm font-bold text-navy dark:text-white md:col-span-2">
-          Supporting files (optional)
+          {t('Supporting files (optional)')}
           <input
             ref={fileInput}
             name="attachment"
@@ -112,7 +114,7 @@ export function PartnersForm() {
                     onClick={() => removeFile(file)}
                     className="cursor-pointer shrink-0 font-bold text-red-600 hover:text-red-800 dark:text-red-400"
                   >
-                    Delete
+                    {t('Delete')}
                   </button>
                 </li>
               ))}
@@ -120,41 +122,41 @@ export function PartnersForm() {
           )}
           {oversizedFiles.length > 0 && (
             <p className="mt-3 text-sm font-bold text-red-600 dark:text-red-400">
-              {oversizedFiles.map((file) => file.name).join(', ')} must be 10 MB or smaller.
+              {oversizedFiles.map((file) => file.name).join(', ')} {t('must be 10 MB or smaller.')}
             </p>
           )}
         </label>
         <label className="text-sm font-bold text-navy dark:text-white md:col-span-2">
-          What services do you offer?
+          {t('What services do you offer?')}
           <textarea
             required
             name="offer"
             rows={5}
-            placeholder="Please include your specialty and anything useful to know."
+            placeholder={t('Please include your specialty and anything useful to know.')}
             className="mt-2 w-full resize-y rounded-xl border-2 border-teal/25 bg-white px-4 py-3 font-normal text-navy outline-none transition-colors placeholder:text-navy/40 focus:border-teal focus:ring-2 focus:ring-mint/40 dark:border-teal/40 dark:bg-[#0c1527] dark:text-white dark:placeholder:text-white/40 dark:focus:border-mint"
           />
         </label>
       </div>
       <div className="mt-6 flex flex-wrap gap-3">
         <Button type="submit" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Sending…' : 'Introduce your service'}
+          {status === 'sending' ? t('Sending…') : t('Introduce your service')}
         </Button>
         <Button type="button" variant="secondary" onClick={whatsapp}>
-          Continue via WhatsApp ↗
+          {t('Continue via WhatsApp ↗')}
         </Button>
       </div>
       {status === 'sent' && (
         <p className="mt-4 text-sm font-bold text-teal dark:text-mint">
-          Thanks — your introduction has been sent. DZ will be in touch.
+          {t('Thanks — your introduction has been sent. DZ will be in touch.')}
         </p>
       )}
       {status === 'error' && (
         <p className="mt-4 text-sm font-bold text-red-600 dark:text-red-400">
-          Email could not be sent. Please try WhatsApp or contact DZ directly.
+          {t('Email could not be sent. Please try WhatsApp or contact DZ directly.')}
         </p>
       )}
       <small className="mt-4 block font-medium text-navy/70 dark:text-white/70">
-        Submitting does not guarantee a partnership or recommendation.
+        {t('Submitting does not guarantee a partnership or recommendation.')}
       </small>
     </form>
   );

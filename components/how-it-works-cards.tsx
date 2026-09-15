@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { Reveal } from '@/components/reveal';
+import { useLanguage } from '@/components/language-provider';
 
 const steps: { title: string; tagline: string; icon: LucideIcon; body: string }[] = [
   {
@@ -62,6 +63,7 @@ function StepCard({
   i: number;
   align: 'left' | 'right';
 }) {
+  const { t } = useLanguage();
   const Icon = step.icon;
   return (
     <div
@@ -79,16 +81,17 @@ function StepCard({
           <Icon size={20} strokeWidth={2.2} />
         </div>
         <span className="font-mono text-xs font-bold uppercase tracking-widest text-teal dark:text-mint">
-          {step.tagline}
+          {t(step.tagline)}
         </span>
       </div>
-      <h3 className="text-2xl font-bold text-navy dark:text-white">{step.title}</h3>
-      <p className="mt-3 text-base leading-relaxed text-navy/80 dark:text-white/80">{step.body}</p>
+      <h3 className="text-2xl font-bold text-navy dark:text-white">{t(step.title)}</h3>
+      <p className="mt-3 text-base leading-relaxed text-navy/80 dark:text-white/80">{t(step.body)}</p>
     </div>
   );
 }
 
 export function HowItWorksCards() {
+  const { t } = useLanguage();
   const desktopTimelineRef = useRef<HTMLDivElement>(null);
   const mobileTimelineRef = useRef<HTMLDivElement>(null);
   const desktopNodesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -142,13 +145,13 @@ export function HowItWorksCards() {
         <Reveal>
           <div>
             <p className="font-mono text-xs font-bold uppercase tracking-[.2em] text-teal dark:text-mint">
-              A quick guide
+              {t('A quick guide')}
             </p>
             <h2 className="display mt-3 max-w-2xl text-4xl font-bold leading-tight text-navy dark:text-white md:text-5xl">
-              How Sorted by DZ works.
+              {t('How Sorted by DZ works.')}
             </h2>
             <p className="mt-4 max-w-xl text-lg font-medium text-navy/80 dark:text-white/90">
-              Six simple steps, from telling DZ what you need to confirming the provider you like.
+              {t('Six simple steps, from telling DZ what you need to confirming the provider you like.')}
             </p>
           </div>
         </Reveal>
@@ -254,12 +257,12 @@ export function HowItWorksCards() {
                     <div className="mb-1 flex items-center gap-2">
                       <Icon size={14} className="text-teal dark:text-mint" />
                       <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-teal dark:text-mint">
-                        {step.tagline}
+                        {t(step.tagline)}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold text-navy dark:text-white">{step.title}</h3>
+                    <h3 className="text-xl font-bold text-navy dark:text-white">{t(step.title)}</h3>
                     <p className="mt-1.5 text-sm leading-relaxed text-navy/80 dark:text-white/80">
-                      {step.body}
+                      {t(step.body)}
                     </p>
                   </motion.div>
                 </div>
@@ -272,19 +275,19 @@ export function HowItWorksCards() {
         <Reveal>
           <div className="mt-20 flex flex-col items-center gap-4 rounded-2xl border-2 border-teal/20 bg-teal/5 px-8 py-12 text-center dark:border-teal/30 dark:bg-teal/10">
             <p className="font-mono text-xs font-bold uppercase tracking-[.2em] text-teal dark:text-mint">
-              Ready to get started?
+              {t('Ready to get started?')}
             </p>
             <h3 className="text-3xl font-bold text-navy dark:text-white md:text-4xl">
-              Tell DZ what you need.
+              {t('Tell DZ what you need.')}
             </h3>
             <p className="max-w-md text-base font-medium text-navy/75 dark:text-white/80">
-              No sign-up, no back-and-forth — just tell us what you&apos;re looking for and we&apos;ll take it from there.
+              {t('No sign-up, no back-and-forth — just tell us what you’re looking for and we’ll take it from there.')}
             </p>
             <Link
               href="/contact"
               className="mt-2 inline-flex items-center gap-2 rounded-full bg-teal px-8 py-3.5 font-bold text-white shadow-lg shadow-teal/25 transition-all duration-200 hover:scale-105 hover:bg-navy dark:hover:bg-mint dark:hover:text-navy"
             >
-              Make a request →
+              {t('Make a request →')}
             </Link>
           </div>
         </Reveal>

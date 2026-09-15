@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { Phone, Mail } from 'lucide-react';
 import { config } from '@/lib/data';
+import { useLanguage } from './language-provider';
 
 function Instagram({ size = 24, className = '' }: { size?: number; className?: string }) {
   return (
@@ -36,6 +39,8 @@ const contactItems = [
 ];
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="border-t border-teal/20 bg-navy px-5 py-12 text-white/90 dark:border-teal/30 dark:bg-[#070b14] md:px-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 border-b border-teal/20 pb-8 md:flex-row md:items-start md:justify-between">
@@ -47,8 +52,7 @@ export function Footer() {
             sorted <span className="text-mint">by dz</span>
           </Link>
           <p className="mt-3 max-w-xs text-sm leading-6 text-white/75">
-            A personal service-connection platform, matching requests with the right provider across{' '}
-            {config.area}.
+            {t('A personal service-connection platform, matching requests with the right provider across Malaysia.')}
           </p>
         </div>
 
@@ -74,14 +78,14 @@ export function Footer() {
               href={href}
               className="text-white/90 transition-colors duration-200 hover:text-mint"
             >
-              {label}
+              {t(label)}
             </Link>
           ))}
         </nav>
       </div>
       <div className="mx-auto mt-5 flex max-w-7xl flex-col gap-1 text-xs text-white/70 md:flex-row md:items-center md:justify-between">
-        <p>© {new Date().getFullYear()} Sorted by DZ. A personal service-connection platform.</p>
-        <p>Service availability depends on location and provider fit.</p>
+        <p>© {new Date().getFullYear()} Sorted by DZ. {t('A personal service-connection platform.')}</p>
+        <p>{t('Service availability depends on location and provider fit.')}</p>
       </div>
     </footer>
   );

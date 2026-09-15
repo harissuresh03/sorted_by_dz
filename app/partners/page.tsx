@@ -1,5 +1,8 @@
+'use client';
+
 import { Reveal } from '@/components/reveal';
 import { PartnersForm } from '@/components/partners-form';
+import { useLanguage } from '@/components/language-provider';
 
 const steps = [
   {
@@ -17,22 +20,22 @@ const steps = [
 ];
 
 export default function Partners() {
+  const { t } = useLanguage();
+
   return (
     <main className="min-h-[72vh] px-5 py-24 md:px-10">
         <section className="mx-auto max-w-5xl">
           <Reveal>
             <p className="font-mono text-xs font-bold uppercase tracking-[.2em] text-teal dark:text-mint">
-              For service providers
+              {t('For service providers')}
             </p>
             <h1 className="display mt-5 max-w-4xl text-5xl font-bold leading-tight text-navy dark:text-white md:text-7xl">
-              Bring good work
+              {t('Bring good work')}
               <br />
-              into view.
+              {t('into view.')}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-navy/85 dark:text-white/90">
-              If you offer a service and would like to be considered for future customer requests, tell
-              DZ about your work. Sorted by DZ does not guarantee bookings — it helps put good, reliable
-              providers in front of the right requests.
+              {t('If you offer a service and would like to be considered for future customer requests, tell DZ about your work. Sorted by DZ does not guarantee bookings — it helps put good, reliable providers in front of the right requests.')}
             </p>
           </Reveal>
 
@@ -44,8 +47,8 @@ export default function Partners() {
                     <span className="grid h-11 w-11 place-items-center rounded-xl border-2 border-teal/30 bg-teal/10 font-mono text-xs font-bold text-teal dark:border-mint/30 dark:bg-mint/15 dark:text-mint">
                       0{i + 1}
                     </span>
-                    <h3 className="mt-5 text-base font-bold text-navy dark:text-white">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-navy/85 dark:text-white/90">{step.body}</p>
+                    <h3 className="mt-5 text-base font-bold text-navy dark:text-white">{t(step.title)}</h3>
+                    <p className="mt-2 text-sm leading-6 text-navy/85 dark:text-white/90">{t(step.body)}</p>
                   </div>
                 </Reveal>
               ))}

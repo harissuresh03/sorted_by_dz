@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
+import { LanguageProvider } from '@/components/language-provider';
 import { ScrollToTop } from '@/components/scroll-to-top';
 
 const inter = Inter({
@@ -22,10 +23,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider>
-          <Navigation />
-          {children}
-          <Footer />
-          <ScrollToTop />
+          <LanguageProvider>
+            <Navigation />
+            {children}
+            <Footer />
+            <ScrollToTop />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
