@@ -15,8 +15,9 @@ export function RequestForm() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setStatus('sending');
-    const data = Object.fromEntries(new FormData(event.currentTarget));
+    const data = Object.fromEntries(new FormData(form));
     try {
       const response = await fetch('/api/request', {
         method: 'POST',
@@ -25,7 +26,7 @@ export function RequestForm() {
       });
       if (!response.ok) throw new Error();
       setStatus('sent');
-      event.currentTarget.reset();
+      form.reset();
       setService('');
     } catch {
       setStatus('error');

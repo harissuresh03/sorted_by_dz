@@ -28,8 +28,9 @@ export function PartnersForm() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (oversizedFiles.length > 0) return;
+    const form = event.currentTarget;
     setStatus('sending');
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     try {
       const response = await fetch('/api/partners', {
         method: 'POST',
@@ -37,7 +38,7 @@ export function PartnersForm() {
       });
       if (!response.ok) throw new Error();
       setStatus('sent');
-      event.currentTarget.reset();
+      form.reset();
       setFiles([]);
     } catch {
       setStatus('error');
